@@ -340,9 +340,12 @@ find "$RPM_BUILD_ROOT""%{__prefix}"/bin -type f -o -type l |
         grep -v -e '/bin/smtpd.py%{binsuffix}$' |
         grep -v -e '/bin/idle%{binsuffix}$' >>mainpkg.files
 echo %{__prefix}/include/python%{libvers}/pyconfig.h >> mainpkg.files
+
+if [ -d "$RPM_BUILD_ROOT""%{__prefix}"/share ] ; then
 find "$RPM_BUILD_ROOT""%{__prefix}"/share -type f  |
         sed "s|^${RPM_BUILD_ROOT}|/|" |
         grep -e 'python%{libvers}.1' >> mainpkg.files
+fi
 
 %if %{include_tools}
 rm -f tools.files
