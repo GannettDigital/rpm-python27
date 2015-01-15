@@ -19,7 +19,7 @@
 %define version 2.7.6
 %define libvers 2.7
 %define release 1
-%define __prefix /usr
+%define __prefix /usr/local
 
 
 #  Build tkinter?  "auto" enables it if /usr/bin/wish exists.
@@ -91,7 +91,7 @@
 Summary: An interpreted, interactive, object-oriented programming language.
 Name: %{name}
 Version: %{version}
-Release: %{release}
+Release: %{release}.gd
 License: PSF
 Group: Development/Languages
 Provides: python-abi = %{libvers}
@@ -340,6 +340,9 @@ find "$RPM_BUILD_ROOT""%{__prefix}"/bin -type f -o -type l |
         grep -v -e '/bin/smtpd.py%{binsuffix}$' |
         grep -v -e '/bin/idle%{binsuffix}$' >>mainpkg.files
 echo %{__prefix}/include/python%{libvers}/pyconfig.h >> mainpkg.files
+find "$RPM_BUILD_ROOT""%{__prefix}"/share -type f  |
+        sed "s|^${RPM_BUILD_ROOT}|/|" |
+        grep -e 'python%{libvers}.1' >> mainpkg.files
 
 %if %{include_tools}
 rm -f tools.files
