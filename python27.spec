@@ -91,7 +91,7 @@
 Summary: An interpreted, interactive, object-oriented programming language.
 Name: %{name}
 Version: %{version}
-Release: %{release}.gd
+Release: %{release}
 License: PSF
 Group: Development/Languages
 Provides: python-abi = %{libvers}
