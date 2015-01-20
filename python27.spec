@@ -18,7 +18,7 @@
 %define name python27
 %define version 2.7.6
 %define libvers 2.7
-%define release 1
+%define release 1%{?dist}.gd
 %define __prefix /usr/local
 
 
