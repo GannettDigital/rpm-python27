@@ -54,8 +54,8 @@
 
 
 #  Build shared libraries or .a library?
-%define config_sharedlib yes
 %define config_sharedlib no
+%define config_sharedlib yes
 
 
 #  Location of the HTML directory to place tho documentation in?
