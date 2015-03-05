@@ -324,11 +324,6 @@ fi
 # Fix permissions
 chmod 644 $RPM_BUILD_ROOT%{__prefix}/%{libdirname}/libpython%{libvers}*
 
-%{__install} -m 644 -p %{SOURCE4} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
-
-echo "%{__prefix/lib" > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
-
 ########
 #  Tools
 %if %{include_tools}
@@ -406,8 +401,6 @@ rm -f mainpkg.files tools.files
 %{__prefix}/%{libdirname}/python%{libvers}/lib2to3/tests/data/
 %{__prefix}/%{libdirname}/pkgconfig/python-%{libvers}.pc
 
-%{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
-
 %attr(755,root,root) %dir %{__prefix}/include/python%{libvers}
 %attr(755,root,root) %dir %{__prefix}/%{libdirname}/python%{libvers}/
 %attr(755,root,root) %dir %{__prefix}/%{libdirname}/python%{libvers}/
@@ -446,16 +439,10 @@ rm -f mainpkg.files tools.files
 %{config_htmldir}/*
 %endif
 
-%pre
-# no pre install steps, just here as a placeholder
-
 %post
-# Run ldconfig to add the python library path
-ldconfig
-
-%preun
-# no pre uninstall steps, just here as a placeholder
+echo "%{__prefix}/lib" > %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
+/sbin/ldconfig
 
 %postun
-# Run ldconfig to remove the python library path
-ldconfig
+rm -f %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
+/sbin/ldconfig
