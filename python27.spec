@@ -16,9 +16,9 @@
 
 #  Define Constants
 %define name python27
-%define version 2.7.6
+%define version @@VERSION@@
 %define libvers 2.7
-%define release 1%{?dist}.gd
+%define release @@RELEASE@@%{?dist}.gd
 %define __prefix /usr/local
 
 
@@ -96,7 +96,7 @@ License: PSF
 Group: Development/Languages
 Provides: python-abi = %{libvers}
 Provides: python(abi) = %{libvers}
-Source: https://www.python.org/ftp/python/%{version}/Python-%{version}.tgz
+Source0: https://www.python.org/ftp/python/%{version}/Python-%{version}.tgz
 %if %{include_docs}
 Source1: https://docs.python.org/2/archives/python-%{version}-docs-html.tar.bz2
 %endif
@@ -437,3 +437,11 @@ rm -f mainpkg.files tools.files
 %defattr(-,root,root)
 %{config_htmldir}/*
 %endif
+
+%post
+echo "%{__prefix}/lib" > %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
+/sbin/ldconfig
+
+%postun
+rm -f %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
+/sbin/ldconfig
