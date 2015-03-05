@@ -100,7 +100,6 @@ Source0: https://www.python.org/ftp/python/%{version}/Python-%{version}.tgz
 %if %{include_docs}
 Source1: https://docs.python.org/2/archives/python-%{version}-docs-html.tar.bz2
 %endif
-Source2: %{name}-x86_64.conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: gcc make expat-devel db4-devel gdbm-devel sqlite-devel readline-devel zlib-devel bzip2-devel openssl-devel
 AutoReq: no
