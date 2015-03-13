@@ -283,7 +283,7 @@ echo "Setting for include_tkinter: %{include_tkinter}"
 echo "Setting for libdirname: %{libdirname}"
 echo "Setting for sharedlib: %{sharedlib}"
 echo "Setting for include_sharedlib: %{include_sharedlib}"
-./configure --enable-unicode=ucs4 --with-signal-module --with-threads %{sharedlib} %{ipv6} %{pymalloc} --prefix=%{__prefix}
+./configure --enable-unicode=ucs2 --with-signal-module --with-threads %{sharedlib} %{ipv6} %{pymalloc} --prefix=%{__prefix}
 make %{_smp_mflags}
 
 
