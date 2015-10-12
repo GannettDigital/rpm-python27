@@ -20,7 +20,8 @@
 %define libvers 2.7
 %define release @@RELEASE@@%{?dist}.gd
 %define __prefix /usr/local
-
+# Disable failing build on rpm brp-python-bytecompile errors
+%global _python_bytecompile_errors_terminate_build 0
 
 #  Build tkinter?  "auto" enables it if /usr/bin/wish exists.
 %define config_tkinter yes
