@@ -82,7 +82,7 @@
 %define pymalloc %(if [ "%{config_pymalloc}" = yes ]; then echo --with-pymalloc; else echo --without-pymalloc; fi)
 %define binsuffix %(if [ "%{config_binsuffix}" = none ]; then echo ; else echo "%{config_binsuffix}"; fi)
 %define libdirname lib
-%define sharedlib %(if [ "%{config_sharedlib}" = yes ]; then echo --enable-shared; else echo ; fi)
+%define sharedlib %(if [ "%{config_sharedlib}" = yes ]; then echo "--enable-shared LDFLAGS='-Wl,-rpath /usr/local/lib'"; else echo ; fi)
 %define include_sharedlib %(if [ "%{config_sharedlib}" = yes ]; then echo 1; else echo 0; fi)
 
 
@@ -440,9 +440,9 @@ rm -f mainpkg.files tools.files
 %endif
 
 %post
-echo "%{__prefix}/lib" > %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
-/sbin/ldconfig
+#echo "%{__prefix}/lib" > %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
+#/sbin/ldconfig
 
 %postun
-rm -f %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
-/sbin/ldconfig
+#rm -f %{_sysconfdir}/ld.so.conf.d/%{name}-x86_64.conf
+#/sbin/ldconfig
